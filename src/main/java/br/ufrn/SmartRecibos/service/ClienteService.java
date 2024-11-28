@@ -11,9 +11,9 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public Cliente save(Cliente entityT) {
+    public Cliente save(Cliente cliente) {
 
-        return clienteRepository.save(entityT);
+        return clienteRepository.save(cliente);
     }
 
 }
