@@ -1,5 +1,6 @@
 package br.ufrn.SmartRecibos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,7 @@ public class Endereco {
     public Long id;
 
     @OneToOne(mappedBy = "endereco")
+    @JsonIgnore
     public Cliente cliente;
     @Column(nullable = false)
     public String logradouro;

@@ -1,22 +1,58 @@
 package br.ufrn.SmartRecibos.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import br.ufrn.SmartRecibos.dto.ClienteRequest;
+import br.ufrn.SmartRecibos.dto.TelefoneRequest;
+import br.ufrn.SmartRecibos.model.Endereco;
+import br.ufrn.SmartRecibos.model.Telefone;
+import br.ufrn.SmartRecibos.repository.EnderecoRequest;
+import br.ufrn.SmartRecibos.repository.TelefoneRepository;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.SmartRecibos.model.Cliente;
 import br.ufrn.SmartRecibos.repository.ClienteRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
     private final ClienteRepository clienteRepository;
+    private final TelefoneRepository telefoneRepository;
+    private final EnderecoRequest enderecoRequest;
 
-    public ClienteService(ClienteRepository clienteRepository) {
+    public ClienteService(ClienteRepository clienteRepository, TelefoneRepository telefoneRepository, EnderecoRequest enderecoRequest) {
         this.clienteRepository = clienteRepository;
+        this.telefoneRepository = telefoneRepository;
+        this.enderecoRequest = enderecoRequest;
     }
 
-    public Cliente save(Cliente cliente) {
+    public Cliente save(ClienteRequest request) {
+        Cliente cliente = new Cliente();
+        cliente.setNome(request.nome());
+        cliente.setCpfCnpj(request.cpfCnpj());
+        cliente.setEmail(request.email());
+        cliente.setPj(request.isPj());
+        cliente.setAtivo(request.isAtivo());
+
+        Endereco endereco = new Endereco();
+        endereco.setLogradouro(request.endereco().logradouro());
+        endereco.setNumero(request.endereco().numero());
+        endereco.setBairro(request.endereco().bairro());
+        endereco.setCidade(request.endereco().cidade());
+        endereco.setEstado(request.endereco().estado());
+        endereco.setCep(request.endereco().cep());
+        endereco.setComplemento(request.endereco().complemento());
+        cliente.setEndereco(endereco);
+
+        List<Telefone> telefones = request.telefone().stream()
+                .map(telefoneRequest -> {
+                    Telefone telefone = new Telefone();
+                    telefone.setNumero(telefoneRequest.numero());
+                    telefone.setCliente(cliente);
+                    return telefone;
+                })
+                .toList();
+        cliente.setTelefone(telefones);
         return clienteRepository.save(cliente);
     }
 

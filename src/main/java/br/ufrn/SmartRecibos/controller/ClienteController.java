@@ -1,5 +1,6 @@
 package br.ufrn.SmartRecibos.controller;
 
+import br.ufrn.SmartRecibos.dto.ClienteRequest;
 import br.ufrn.SmartRecibos.model.Cliente;
 import br.ufrn.SmartRecibos.service.ClienteService;
 
@@ -23,7 +24,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    public Cliente save(@RequestBody Cliente cliente) {
+    public Cliente save(@RequestBody ClienteRequest cliente) {
         return clienteService.save(cliente);
     }
 
