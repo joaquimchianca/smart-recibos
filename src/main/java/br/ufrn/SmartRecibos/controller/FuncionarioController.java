@@ -10,7 +10,7 @@ import br.ufrn.SmartRecibos.model.Funcionario;
 import br.ufrn.SmartRecibos.service.FuncionarioService;
 
 @RestController
-@RequestMapping("funcionario")
+@RequestMapping("v1/funcionario")
 public class FuncionarioController {
     @Autowired
     private FuncionarioService funcionarioService;
