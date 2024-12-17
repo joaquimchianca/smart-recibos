@@ -1,6 +1,5 @@
 package br.ufrn.SmartRecibos.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import br.ufrn.SmartRecibos.model.Funcionario;

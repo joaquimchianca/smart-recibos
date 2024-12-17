@@ -4,7 +4,6 @@ import br.ufrn.SmartRecibos.dto.ClienteRequest;
 import br.ufrn.SmartRecibos.model.Cliente;
 import br.ufrn.SmartRecibos.service.ClienteService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

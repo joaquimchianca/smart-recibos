@@ -1,5 +1,6 @@
 package br.ufrn.SmartRecibos.controller;
 
+import br.ufrn.SmartRecibos.dto.ReciboRequest;
 import br.ufrn.SmartRecibos.model.Recibo;
 import br.ufrn.SmartRecibos.service.ReciboService;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class ReciboController {
     }
 
     @PostMapping
-    public Recibo save(@RequestBody Recibo recibo) {
+    public Recibo save(@RequestBody ReciboRequest recibo) {
         return reciboService.save(recibo);
     }
 

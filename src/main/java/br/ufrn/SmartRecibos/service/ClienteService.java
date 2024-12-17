@@ -1,29 +1,21 @@
 package br.ufrn.SmartRecibos.service;
 
 import br.ufrn.SmartRecibos.dto.ClienteRequest;
-import br.ufrn.SmartRecibos.dto.TelefoneRequest;
 import br.ufrn.SmartRecibos.model.Endereco;
 import br.ufrn.SmartRecibos.model.Telefone;
-import br.ufrn.SmartRecibos.repository.EnderecoRequest;
-import br.ufrn.SmartRecibos.repository.TelefoneRepository;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.SmartRecibos.model.Cliente;
 import br.ufrn.SmartRecibos.repository.ClienteRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
     private final ClienteRepository clienteRepository;
-    private final TelefoneRepository telefoneRepository;
-    private final EnderecoRequest enderecoRequest;
 
-    public ClienteService(ClienteRepository clienteRepository, TelefoneRepository telefoneRepository, EnderecoRequest enderecoRequest) {
+    public ClienteService(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
-        this.telefoneRepository = telefoneRepository;
-        this.enderecoRequest = enderecoRequest;
     }
 
     public Cliente save(ClienteRequest request) {
