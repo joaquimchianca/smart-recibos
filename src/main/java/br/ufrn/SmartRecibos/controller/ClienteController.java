@@ -4,6 +4,7 @@ import br.ufrn.SmartRecibos.dto.ClienteRequest;
 import br.ufrn.SmartRecibos.model.Cliente;
 import br.ufrn.SmartRecibos.service.ClienteService;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class ClienteController {
     }
 
     @GetMapping
-    public List<Cliente> findAll() {
-        return clienteService.findAll();
+    public List<Cliente> findAll(Pageable pageable) {
+        return clienteService.findAll(pageable).getContent();
     }
 
     @PostMapping

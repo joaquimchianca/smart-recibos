@@ -24,7 +24,7 @@ public class Funcionario {
     private String email;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
+    // @Enumerated(EnumType.STRING)
     private Papel papel;
 
 }

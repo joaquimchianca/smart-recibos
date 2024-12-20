@@ -3,6 +3,8 @@ package br.ufrn.SmartRecibos.controller;
 import br.ufrn.SmartRecibos.dto.ReciboRequest;
 import br.ufrn.SmartRecibos.model.Recibo;
 import br.ufrn.SmartRecibos.service.ReciboService;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +24,8 @@ public class ReciboController {
     }
 
     @GetMapping
-    public List<Recibo> findAll() {
-        return reciboService.findAll();
+    public List<Recibo> findAll(Pageable pageable) {
+        return reciboService.findAll(pageable).getContent();
     }
 
     @GetMapping("/{id}")

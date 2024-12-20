@@ -23,14 +23,14 @@ public class Recibo {
     private BigDecimal valor;
     private String descricao;
 
-    @Enumerated(EnumType.STRING)
+    // @Enumerated(EnumType.STRING)
     private StatusRecibo status;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 }
