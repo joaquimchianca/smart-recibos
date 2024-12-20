@@ -14,5 +14,4 @@ public record ReciboRequest(
         StatusRecibo status,
         Long cliente_id,
         Long funcionario_id) {
-
 }

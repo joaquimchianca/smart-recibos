@@ -4,5 +4,6 @@ public enum StatusRecibo {
     PENDENTE,
     PAGO,
     CANCELADO,
-    CRIADO
+    CRIADO,
+    VENCIDO
 }

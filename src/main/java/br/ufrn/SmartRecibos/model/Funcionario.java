@@ -28,8 +28,6 @@ public class Funcionario {
     @Column(nullable = false, unique = true)
     private String email;
 
-    private String telefone;
-
     @Column(nullable = false)
     private Papel papel;
 
