@@ -19,6 +19,7 @@ public class Recibo {
     private Long id;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
+    private LocalDateTime dataVencimento;
     private BigDecimal valor;
     private String descricao;
     private StatusRecibo status;
