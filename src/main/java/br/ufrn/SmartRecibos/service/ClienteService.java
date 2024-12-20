@@ -3,6 +3,7 @@ package br.ufrn.SmartRecibos.service;
 import br.ufrn.SmartRecibos.dto.ClienteRequest;
 import br.ufrn.SmartRecibos.model.Endereco;
 import br.ufrn.SmartRecibos.model.Telefone;
+import br.ufrn.SmartRecibos.repository.EnderecoRepository;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.SmartRecibos.model.Cliente;
@@ -13,9 +14,11 @@ import java.util.List;
 @Service
 public class ClienteService {
     private final ClienteRepository clienteRepository;
+    private final EnderecoRepository enderecoRepository;
 
-    public ClienteService(ClienteRepository clienteRepository) {
+    public ClienteService(ClienteRepository clienteRepository, EnderecoRepository enderecoRepository) {
         this.clienteRepository = clienteRepository;
+        this.enderecoRepository = enderecoRepository;
     }
 
     public Cliente save(ClienteRequest request) {
@@ -26,14 +29,8 @@ public class ClienteService {
         cliente.setPj(request.isPj());
         cliente.setAtivo(request.isAtivo());
 
-        Endereco endereco = new Endereco();
-        endereco.setLogradouro(request.endereco().logradouro());
-        endereco.setNumero(request.endereco().numero());
-        endereco.setBairro(request.endereco().bairro());
-        endereco.setCidade(request.endereco().cidade());
-        endereco.setEstado(request.endereco().estado());
-        endereco.setCep(request.endereco().cep());
-        endereco.setComplemento(request.endereco().complemento());
+        Endereco endereco = enderecoRepository.findById(request.enderecoId())
+                        .orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
         cliente.setEndereco(endereco);
 
         List<Telefone> telefones = request.telefone().stream()

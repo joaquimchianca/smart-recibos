@@ -7,7 +7,7 @@ public record ClienteRequest(
         String cpfCnpj,
         String email,
         List<TelefoneRequest> telefone,
-        EnderecoRequest endereco,
+        int enderecoId,
         boolean isPj,
         boolean isAtivo
 ){

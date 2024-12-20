@@ -16,9 +16,6 @@ public class Endereco {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @OneToOne(mappedBy = "endereco")
-    @JsonIgnore
-    public Cliente cliente;
     @Column(nullable = false)
     public String logradouro;
     @Column(nullable = false)
