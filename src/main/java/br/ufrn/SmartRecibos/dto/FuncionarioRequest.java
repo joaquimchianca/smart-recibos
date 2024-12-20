@@ -5,5 +5,8 @@ import br.ufrn.SmartRecibos.model.Papel;
 public record FuncionarioRequest(
         String nome,
         String email,
-        Papel papel) {
+        Papel papel,
+        String username,
+        String password
+) {
 }
