@@ -61,6 +61,14 @@ public class ReciboService {
         return reciboRepository.save(recibo);
     }
 
+    public void syncStatus(long id, String status) {
+        StatusRecibo statusRecibo = StatusRecibo.valueOf(status.toUpperCase());
+        int rows = reciboRepository.syncStatus(id, statusRecibo);
+        if (rows <= 0) {
+            throw new RuntimeException("Recibo não encontrado");
+        }
+    }
+
     public void delete(Long id) {
         reciboRepository.deleteById(id);
     }

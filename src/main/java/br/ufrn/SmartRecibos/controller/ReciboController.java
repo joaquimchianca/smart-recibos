@@ -35,4 +35,9 @@ public class ReciboController {
     public void delete(@PathVariable Long id) {
         reciboService.delete(id);
     }
+
+    @PatchMapping("/{id}")
+    public void syncStatus(@PathVariable Long id, @RequestParam String status) {
+        reciboService.syncStatus(id, status);
+    }
 }
