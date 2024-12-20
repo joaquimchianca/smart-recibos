@@ -23,7 +23,7 @@ public class Recibo {
     private BigDecimal valor;
     private String descricao;
 
-    // @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private StatusRecibo status;
 
     @ManyToOne
