@@ -22,6 +22,8 @@ public class Recibo {
     private LocalDateTime dataVencimento;
     private BigDecimal valor;
     private String descricao;
+
+    @Enumerated(EnumType.STRING)
     private StatusRecibo status;
 
     @OneToOne
