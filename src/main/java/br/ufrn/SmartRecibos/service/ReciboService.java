@@ -4,11 +4,13 @@ import br.ufrn.SmartRecibos.dto.ReciboRequest;
 import br.ufrn.SmartRecibos.model.Cliente;
 import br.ufrn.SmartRecibos.model.Funcionario;
 import br.ufrn.SmartRecibos.model.Recibo;
+import br.ufrn.SmartRecibos.model.StatusRecibo;
 import br.ufrn.SmartRecibos.repository.ClienteRepository;
 import br.ufrn.SmartRecibos.repository.FuncionarioRepository;
 import br.ufrn.SmartRecibos.repository.ReciboRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -39,8 +41,14 @@ public class ReciboService {
         recibo.setValor(request.valor());
         recibo.setDescricao(request.descricao());
 
-        recibo.setDataCriacao(request.dataCriacao());
-        recibo.setStatus(request.status());
+        recibo.setDataCriacao(LocalDateTime.now());
+        recibo.setDataAtualizacao(LocalDateTime.now());
+        recibo.setDataVencimento(request.dataVencimento());
+        recibo.setStatus(StatusRecibo.CRIADO);
+
+        if (recibo.getDataAtualizacao().isBefore(recibo.getDataVencimento())) {
+            recibo.setStatus(StatusRecibo.PENDENTE);
+        }
 
         Cliente cliente = clienteRepository.findById(request.cliente_id())
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
