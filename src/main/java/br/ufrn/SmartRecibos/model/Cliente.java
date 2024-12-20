@@ -17,16 +17,21 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     public String nome;
+
     @Column(nullable = false, unique = true, length = 14)
     public String cpfCnpj;
+
     @Column(nullable = false, unique = true)
     public String email;
+
     @Column(nullable = false)
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     public List<Telefone> telefone;
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     public Endereco endereco;
     private boolean isPj;

@@ -1,27 +1,39 @@
 package br.ufrn.SmartRecibos.controller;
 
+import br.ufrn.SmartRecibos.dto.ClienteRequest;
 import br.ufrn.SmartRecibos.model.Cliente;
 import br.ufrn.SmartRecibos.service.ClienteService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("cliente")
+@RequestMapping("/v1/cliente")
 public class ClienteController {
+    private final ClienteService clienteService;
 
-    @Autowired
-    private ClienteService clienteService;
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     @GetMapping
-    public Cliente listar() {
-        Cliente cliente = new Cliente();
+    public List<Cliente> findAll() {
+        return clienteService.findAll();
+    }
 
-        if (cliente.getNome().equals("Joao")) {
-            throw new RuntimeException("nao pode ter cliente com nome de Joao");
-        }
+    @PostMapping
+    public Cliente save(@RequestBody ClienteRequest cliente) {
         return clienteService.save(cliente);
+    }
+
+    @GetMapping("/{id}")
+    public Cliente findById(@PathVariable Long id) {
+        return clienteService.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        clienteService.delete(id);
     }
 }
