@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import br.ufrn.SmartRecibos.model.Cliente;
 import br.ufrn.SmartRecibos.model.Recibo;
@@ -24,7 +25,7 @@ class SmartRecibosApplicationTests {
 
 	@Test
 	void testClientePaginado() {
-		Pageable pageable = PageRequest.of(0, 10);
+		Pageable pageable = PageRequest.of(0, 10, Sort.by("nome"));
 		Page<Cliente> clientes = clienteService.findAll(pageable);
 		assertEquals("13171444810", clientes.getContent().get(0).getCpfCnpj());
 

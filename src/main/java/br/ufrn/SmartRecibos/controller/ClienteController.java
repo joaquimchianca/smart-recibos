@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Cliente", description = "API de Clientes")
 @RestController
 @RequestMapping("/v1/cliente")
 public class ClienteController {

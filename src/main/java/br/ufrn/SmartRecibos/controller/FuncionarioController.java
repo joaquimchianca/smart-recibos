@@ -4,9 +4,11 @@ import org.springframework.web.bind.annotation.*;
 
 import br.ufrn.SmartRecibos.model.Funcionario;
 import br.ufrn.SmartRecibos.service.FuncionarioService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
+@Tag(name = "Funcionarios", description = "Endpoints para manipulação de Funcionários")
 @RestController
 @RequestMapping("v1/funcionario")
 public class FuncionarioController {

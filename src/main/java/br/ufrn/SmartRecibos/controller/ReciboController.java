@@ -3,12 +3,14 @@ package br.ufrn.SmartRecibos.controller;
 import br.ufrn.SmartRecibos.dto.ReciboRequest;
 import br.ufrn.SmartRecibos.model.Recibo;
 import br.ufrn.SmartRecibos.service.ReciboService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Recibos", description = "Endpoints para manipulação de Recibos")
 @RestController
 @RequestMapping("v1/recibo")
 public class ReciboController {
