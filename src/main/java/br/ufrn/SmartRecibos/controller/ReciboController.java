@@ -4,10 +4,14 @@ import br.ufrn.SmartRecibos.dto.request.ReciboRequest;
 import br.ufrn.SmartRecibos.model.Recibo;
 import br.ufrn.SmartRecibos.service.ReciboService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Recibos", description = "Endpoints para manipulação de Recibos")
 @RestController
 @RequestMapping("v1/recibo")
 public class ReciboController {
@@ -24,8 +28,8 @@ public class ReciboController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ADM', 'CAIXA')")
-    public List<Recibo> findAll() {
-        return reciboService.findAll();
+    public List<Recibo> findAll(Pageable pageable) {
+        return reciboService.findAll(pageable).getContent();
     }
 
     @GetMapping("/{id}")

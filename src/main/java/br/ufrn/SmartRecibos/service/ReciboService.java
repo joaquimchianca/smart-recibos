@@ -8,10 +8,12 @@ import br.ufrn.SmartRecibos.model.StatusRecibo;
 import br.ufrn.SmartRecibos.repository.ClienteRepository;
 import br.ufrn.SmartRecibos.repository.FuncionarioRepository;
 import br.ufrn.SmartRecibos.repository.ReciboRepository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class ReciboService {
@@ -27,8 +29,8 @@ public class ReciboService {
         this.funcionarioRepository = funcionarioRepository;
     }
 
-    public List<Recibo> findAll() {
-        return reciboRepository.findAll();
+    public Page<Recibo> findAll(Pageable pageable) {
+        return reciboRepository.findAll(pageable);
     }
 
     public Recibo findById(Long id) {

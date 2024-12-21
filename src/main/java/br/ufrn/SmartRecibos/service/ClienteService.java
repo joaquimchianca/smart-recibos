@@ -4,6 +4,9 @@ import br.ufrn.SmartRecibos.dto.request.ClienteRequest;
 import br.ufrn.SmartRecibos.model.Endereco;
 import br.ufrn.SmartRecibos.model.Telefone;
 import br.ufrn.SmartRecibos.repository.EnderecoRepository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.SmartRecibos.model.Cliente;
@@ -30,7 +33,7 @@ public class ClienteService {
         cliente.setAtivo(request.isAtivo());
 
         Endereco endereco = enderecoRepository.findById(request.enderecoId())
-                        .orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
         cliente.setEndereco(endereco);
 
         List<Telefone> telefones = request.telefone().stream()
@@ -45,8 +48,8 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public List<Cliente> findAll() {
-        return clienteRepository.findAll();
+    public Page<Cliente> findAll(Pageable pageable) {
+        return clienteRepository.findAll(pageable);
     }
 
     public Cliente findById(Long id) {

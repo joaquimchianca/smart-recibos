@@ -26,11 +26,11 @@ public class Recibo {
     @Enumerated(EnumType.STRING)
     private StatusRecibo status;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 }
