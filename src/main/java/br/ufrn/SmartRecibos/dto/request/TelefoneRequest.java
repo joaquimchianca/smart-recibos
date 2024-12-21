@@ -1,4 +1,4 @@
-package br.ufrn.SmartRecibos.dto;
+package br.ufrn.SmartRecibos.dto.request;
 
 public record TelefoneRequest(
         String numero

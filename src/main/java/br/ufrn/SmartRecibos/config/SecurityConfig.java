@@ -1,7 +1,9 @@
 package br.ufrn.SmartRecibos.config;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity
@@ -22,9 +25,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
+    private final JwtAuthEntryPoint authEntryPoint;
+    private final JwtAuthFilter filter;
 
-    public SecurityConfig(UserDetailsService userDetailsService) {
+    public SecurityConfig(UserDetailsService userDetailsService, JwtAuthEntryPoint authEntryPoint, JwtAuthFilter filter) {
         this.userDetailsService = userDetailsService;
+        this.authEntryPoint = authEntryPoint;
+        this.filter = filter;
     }
 
     @Bean
@@ -36,9 +43,15 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeRequests(authorize -> {
-                    authorize.requestMatchers("/api/v1/**").permitAll();
+                    authorize.requestMatchers("/v1/auth/**").permitAll();
                     authorize.anyRequest().authenticated();
                 } ).httpBasic(Customizer.withDefaults());
+
+//        http.exceptionHandling( exception -> exception
+//                .authenticationEntryPoint(authEntryPoint));
+
+        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 

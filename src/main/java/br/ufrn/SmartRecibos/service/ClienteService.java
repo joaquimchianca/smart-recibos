@@ -1,6 +1,6 @@
 package br.ufrn.SmartRecibos.service;
 
-import br.ufrn.SmartRecibos.dto.ClienteRequest;
+import br.ufrn.SmartRecibos.dto.request.ClienteRequest;
 import br.ufrn.SmartRecibos.model.Endereco;
 import br.ufrn.SmartRecibos.model.Telefone;
 import br.ufrn.SmartRecibos.repository.EnderecoRepository;

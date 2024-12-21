@@ -1,6 +1,6 @@
 package br.ufrn.SmartRecibos.service;
 
-import br.ufrn.SmartRecibos.dto.ReciboRequest;
+import br.ufrn.SmartRecibos.dto.request.ReciboRequest;
 import br.ufrn.SmartRecibos.model.Cliente;
 import br.ufrn.SmartRecibos.model.Funcionario;
 import br.ufrn.SmartRecibos.model.Recibo;

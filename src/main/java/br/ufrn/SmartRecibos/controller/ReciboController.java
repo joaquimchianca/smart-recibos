@@ -1,6 +1,6 @@
 package br.ufrn.SmartRecibos.controller;
 
-import br.ufrn.SmartRecibos.dto.ReciboRequest;
+import br.ufrn.SmartRecibos.dto.request.ReciboRequest;
 import br.ufrn.SmartRecibos.model.Recibo;
 import br.ufrn.SmartRecibos.service.ReciboService;
 import org.springframework.web.bind.annotation.*;
