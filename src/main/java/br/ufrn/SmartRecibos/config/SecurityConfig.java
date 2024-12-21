@@ -1,6 +1,5 @@
 package br.ufrn.SmartRecibos.config;
 
-import br.ufrn.SmartRecibos.security.JwtAuthEntryPoint;
 import br.ufrn.SmartRecibos.security.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,12 +21,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
-    private final JwtAuthEntryPoint authEntryPoint;
     private final JwtAuthFilter filter;
 
-    public SecurityConfig(UserDetailsService userDetailsService, JwtAuthEntryPoint authEntryPoint, JwtAuthFilter filter) {
+    public SecurityConfig(UserDetailsService userDetailsService, JwtAuthFilter filter) {
         this.userDetailsService = userDetailsService;
-        this.authEntryPoint = authEntryPoint;
         this.filter = filter;
     }
 
@@ -43,9 +40,6 @@ public class SecurityConfig {
                     authorize.requestMatchers("/v1/auth/**").permitAll();
                     authorize.anyRequest().authenticated();
                 } ).httpBasic(Customizer.withDefaults());
-
-        http.exceptionHandling( exception -> exception
-                .authenticationEntryPoint(authEntryPoint));
 
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
