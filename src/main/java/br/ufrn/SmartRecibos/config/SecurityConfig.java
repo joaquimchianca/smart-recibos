@@ -44,8 +44,8 @@ public class SecurityConfig {
                     authorize.anyRequest().authenticated();
                 } ).httpBasic(Customizer.withDefaults());
 
-//        http.exceptionHandling( exception -> exception
-//                .authenticationEntryPoint(authEntryPoint));
+        http.exceptionHandling( exception -> exception
+                .authenticationEntryPoint(authEntryPoint));
 
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 

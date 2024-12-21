@@ -9,6 +9,7 @@ import br.ufrn.SmartRecibos.repository.ClienteRepository;
 import br.ufrn.SmartRecibos.repository.FuncionarioRepository;
 import br.ufrn.SmartRecibos.repository.ReciboRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,8 @@ public class ReciboService {
     }
 
     public Recibo findById(Long id) {
-        return reciboRepository.findById(id).orElse(null);
+        return reciboRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("Recibo não ecnontrado com o id: " + id));
     }
 
     public Recibo save(ReciboRequest request) {
@@ -53,11 +55,11 @@ public class ReciboService {
         }
 
         Cliente cliente = clienteRepository.findById(request.cliente_id())
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
         recibo.setCliente(cliente);
 
         Funcionario funcionario = funcionarioRepository.findById(request.funcionario_id())
-                .orElseThrow(() -> new RuntimeException("Funcionario não encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Funcionario não encontrado"));
         recibo.setFuncionario(funcionario);
 
         return reciboRepository.save(recibo);
@@ -67,7 +69,7 @@ public class ReciboService {
         StatusRecibo statusRecibo = StatusRecibo.valueOf(status.toUpperCase());
         int rows = reciboRepository.syncStatus(id, statusRecibo);
         if (rows <= 0) {
-            throw new RuntimeException("Recibo não encontrado");
+            throw new EntityNotFoundException("Recibo não encontrado");
         }
     }
 

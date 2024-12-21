@@ -1,5 +1,6 @@
 package br.ufrn.SmartRecibos.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.SmartRecibos.model.Funcionario;
@@ -20,7 +21,9 @@ public class FuncionarioService {
     }
 
     public Funcionario findById(Long id) {
-        return funcionarioRepository.findById(id).orElse(null);
+        return funcionarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
+                "Funcionario não encontrado com o id: " + id
+        ));
     }
 
     public Funcionario save(Funcionario funcionario) {

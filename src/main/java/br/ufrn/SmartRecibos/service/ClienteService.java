@@ -5,6 +5,7 @@ import br.ufrn.SmartRecibos.model.Endereco;
 import br.ufrn.SmartRecibos.model.Telefone;
 import br.ufrn.SmartRecibos.repository.EnderecoRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class ClienteService {
         cliente.setAtivo(request.isAtivo());
 
         Endereco endereco = enderecoRepository.findById(request.enderecoId())
-                .orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Endereço não encontrado"));
         cliente.setEndereco(endereco);
 
         List<Telefone> telefones = request.telefone().stream()
@@ -53,7 +54,8 @@ public class ClienteService {
     }
 
     public Cliente findById(Long id) {
-        return clienteRepository.findById(id).orElse(null);
+        return clienteRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("Cliente não encontrado com o id: " + id));
     }
 
     public void delete(Long id) {
