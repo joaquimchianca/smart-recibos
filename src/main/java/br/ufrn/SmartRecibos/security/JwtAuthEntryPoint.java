@@ -1,4 +1,4 @@
-package br.ufrn.SmartRecibos.config;
+package br.ufrn.SmartRecibos.security;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

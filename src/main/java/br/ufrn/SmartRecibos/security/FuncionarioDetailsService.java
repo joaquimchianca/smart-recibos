@@ -1,4 +1,4 @@
-package br.ufrn.SmartRecibos.config;
+package br.ufrn.SmartRecibos.security;
 
 import br.ufrn.SmartRecibos.model.Funcionario;
 import br.ufrn.SmartRecibos.repository.FuncionarioRepository;

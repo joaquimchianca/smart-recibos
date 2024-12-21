@@ -1,6 +1,6 @@
 package br.ufrn.SmartRecibos.service;
 
-import br.ufrn.SmartRecibos.config.JwtTokenProvider;
+import br.ufrn.SmartRecibos.security.JwtTokenProvider;
 import br.ufrn.SmartRecibos.dto.request.LoginRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

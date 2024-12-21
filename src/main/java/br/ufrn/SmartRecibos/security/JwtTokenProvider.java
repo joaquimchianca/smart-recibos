@@ -1,4 +1,4 @@
-package br.ufrn.SmartRecibos.config;
+package br.ufrn.SmartRecibos.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
