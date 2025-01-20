@@ -18,5 +18,6 @@ public class SwaggerConfig {
                 .version("0.0.1")
                 .contact(new Contact().name("Equipe Smart-Recibos")
                         .email("joaquimchianca@gmail.com")));
+
     }
 }
