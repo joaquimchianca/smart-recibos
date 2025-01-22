@@ -40,7 +40,7 @@ public class SecurityConfig {
                     authorize.requestMatchers("/v1/auth/**").permitAll();
                     authorize.anyRequest().authenticated();
                 } ).httpBasic(Customizer.withDefaults());
-
+        http.cors(cors -> cors.disable());
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
